@@ -1,0 +1,66 @@
+<project name="growsari-application" default="tomcat-clean-copy" basedir=".">
+    <description>growsari installer</description>
+
+    <property environment="env"/>
+    <property name="app.name" value="growsari-application"/>
+    <property name="app.location" value="growsari-war/target"/>
+    <property name="tomcat.deploy.dir" value="${env.TOMCAT_HOME}/webapps"/>
+    <property name="mvn.mainclass" value="org.codehaus.plexus.classworlds.launcher.Launcher" />
+    <property name="mvn.args" value="-Dclassworlds.conf=${env.M2_HOME}/bin/m2.conf -Dmaven.home=${env.M2_HOME}" />
+
+    <path id="mvn.classpath">
+        <fileset dir="${env.M2_HOME}/boot">
+            <include name="plexus-classworlds-*.jar" />
+        </fileset>
+    </path>
+
+    <target name="init">
+        <echo>tomcat.deploy.dir=${tomcat.deploy.dir}</echo>
+
+        <condition property="dir.exists">
+            <available file="${tomcat.deploy.dir}" type="dir"/>
+        </condition>
+
+        <fail unless="dir.exists" message="Missing directory: ${tomcat.deploy.dir}"/>
+    </target>
+
+    <target name="tomcat-copy" depends="init" if="dir.exists"
+            description="copies prepared war from target directory to tomcat webapps directory">
+        <copy todir="${tomcat.deploy.dir}" failonerror="true" overwrite="yes">
+            <fileset dir="${app.location}" includes="*.war"/>
+        </copy>
+    </target>
+
+    <target name="tomcat-clean" depends="init" if="dir.exists"
+            description="removes application from sandbox of tomcat">
+        <delete failonerror="true" file="${tomcat.deploy.dir}/${app.name}.war"/>
+        <delete failonerror="true" dir="${tomcat.deploy.dir}/${app.name}"/>
+        <delete failonerror="true" includeemptydirs="true">
+            <fileset dir="${tomcat.deploy.dir}/../temp" includes="**/*"/>
+            <fileset dir="${tomcat.deploy.dir}/../work" includes="**/*"/>
+        </delete>
+    </target>
+
+    <target name="tomcat-clean-copy" depends="tomcat-clean, tomcat-copy"
+            description="removes application then it copies prepared war the tomcat webapps directory"/>
+
+    <target name="project-build" description="executes mvn install">
+        <java classname="${mvn.mainclass}" classpathref="mvn.classpath" fork="true" failonerror="true">
+            <jvmarg line="${mvn.args}"/>
+            <arg value="install"/>
+        </java>
+    </target>
+
+    <target name="project-clean" description="executes mvn clean">
+        <java classname="${mvn.mainclass}" classpathref="mvn.classpath" fork="true" failonerror="true">
+            <jvmarg line="${mvn.args}"/>
+            <arg value="clean"/>
+        </java>
+    </target>
+
+    <target name="project-clean-build" depends="project-clean, project-build"
+            description="executes mvn clean install"/>
+
+    <target name="all" depends="project-clean-build, tomcat-clean-copy"
+            description="Clean build and clean install on Tomcat"/>
+</project>
