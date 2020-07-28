@@ -20,10 +20,10 @@
     </properties>
 
     <modules>
-        <module>growsari-server</module>
-        <module>growsari-client</module>
         <module>growsari-common</module>
         <module>growsari-util</module>
+        <module>growsari-server</module>
+        <module>growsari-client</module>
     </modules>
 
     <build>
