@@ -1,15 +1,25 @@
 package com.growsari.application.common.model.general;
 
 import com.growsari.application.common.model.ModifiableEntity;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 
 /**
  * @author alexander.ballester
  */
+
+@Entity
+@Proxy(lazy = false)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Table(name = "MESSAGE")
 public class Message extends ModifiableEntity {
     private static final long serialVersionUID = 1L;
 

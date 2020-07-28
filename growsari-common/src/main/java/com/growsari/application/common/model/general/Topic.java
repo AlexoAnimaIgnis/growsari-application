@@ -1,9 +1,7 @@
 package com.growsari.application.common.model.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.growsari.application.common.model.AbstractEntity;
 import com.growsari.application.common.model.ModifiableEntity;
-import com.growsari.application.common.model.security.User;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
