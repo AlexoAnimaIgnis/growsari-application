@@ -32,7 +32,7 @@ public class UserController {
     User registerUser(@RequestBody User user) {
         Assert.notNull(user, "User cannot be null");
 
-        logger.info(user.toString());
+        logger.debug(user.toString());
 
         return getUser(userService.saveUser(user).getId());
     }
