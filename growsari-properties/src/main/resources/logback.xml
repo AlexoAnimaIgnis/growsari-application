@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <appender name="secureasy3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>../logs/%d{yyyy/MM/dd, aux}/growsari_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>&lt;%d{ISO8601}&gt;&lt;%-5p&gt;&lt;%c{3}] %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>&lt;%d{ISO8601}&gt;&lt;%-5p&gt;&lt;%c{3}] %m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="com.growsari.application" level="DEBUG">
+        <appender-ref ref="secureasy3"/>
+    </logger>
+    <logger name="org.hibernate.SQL">
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="org.hibernate.type">
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </logger>
+    <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
