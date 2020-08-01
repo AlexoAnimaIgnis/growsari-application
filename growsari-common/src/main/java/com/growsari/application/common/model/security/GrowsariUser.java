@@ -5,11 +5,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author alexander.ballester
@@ -30,6 +30,13 @@ public class GrowsariUser extends GrowsariAbstractEntity {
     @Column(name = "EMAIL", nullable = false)
     @Email
     private String email;
+
+    @ManyToMany
+    @JoinTable(name = "GROWSARI_USER_ACTIVITY",
+            joinColumns = {@JoinColumn(name = "GROWSARI_USER_FK", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "ACTIVITY_FK", nullable = false, updatable = false)}
+    )
+    private Set<UserActivity> activitySet = new LinkedHashSet<>();
 
     public GrowsariUser() {}
 
@@ -61,6 +68,14 @@ public class GrowsariUser extends GrowsariAbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<UserActivity> getActivitySet() {
+        return activitySet;
+    }
+
+    public void setActivitySet(Set<UserActivity> activitySet) {
+        this.activitySet = activitySet;
     }
 
     @Override
