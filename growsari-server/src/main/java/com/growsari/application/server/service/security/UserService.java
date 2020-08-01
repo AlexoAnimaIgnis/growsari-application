@@ -4,11 +4,11 @@ import com.growsari.application.common.model.security.GrowsariUser;
 
 public interface UserService {
 
-    GrowsariUser authenticateUser();
+    GrowsariUserDetails authenticateUser();
 
     GrowsariUser saveUser(GrowsariUser growsariUser);
 
-    GrowsariUser getUser(String id);
+    GrowsariUser getUser(String loginName);
 
     void unsuccessfulAuthentication(String name, Throwable cause);
 }
