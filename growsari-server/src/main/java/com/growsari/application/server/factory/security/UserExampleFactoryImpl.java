@@ -1,21 +1,23 @@
 package com.growsari.application.server.factory.security;
 
 import com.growsari.application.common.dto.security.FindUserRequestDTO;
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserExampleFactoryImpl implements UserExampleFactory {
     @Override
-    public Example<User> createUser(FindUserRequestDTO requestDTO) {
-        User user = new User();
+    public Example<GrowsariUser> createUser(FindUserRequestDTO requestDTO) {
+        GrowsariUser growsariUser = new GrowsariUser();
 
-        user.setName(requestDTO.getName());
-        user.setEmail(requestDTO.getEmail());
+        growsariUser.setName(requestDTO.getName());
+        growsariUser.setEmail(requestDTO.getEmail());
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        return Example.of(user, exampleMatcher);
+        return Example.of(growsariUser, exampleMatcher);
     }
 }

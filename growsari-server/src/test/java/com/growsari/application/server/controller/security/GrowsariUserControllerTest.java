@@ -1,7 +1,7 @@
 package com.growsari.application.server.controller.security;
 
 import com.growsari.application.common.dto.security.AuthenticateResponseDTO;
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 import com.growsari.application.server.service.security.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-public class UserControllerTest {
+public class GrowsariUserControllerTest {
     private static final String ID_PROP = "PROP1";
     private static final String NAME_PROP = "NAME1";
     private static final String EMAIL_PROP = "EMAIL1";
@@ -29,40 +29,40 @@ public class UserControllerTest {
 
     @Test
     public void loginUser(){
-        User user = new User(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
-        user.setId(ID_PROP);
+        GrowsariUser growsariUser = new GrowsariUser(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
+        growsariUser.setId(ID_PROP);
 
-        Mockito.when(userService.authenticateUser()).thenReturn(user);
+        Mockito.when(userService.authenticateUser()).thenReturn(growsariUser);
 
         AuthenticateResponseDTO result = userController.loginUser();
 
-        Assert.assertEquals(user.getName(), result.getName());
-        Assert.assertEquals(user.getId(), result.getId());
+        Assert.assertEquals(growsariUser.getName(), result.getName());
+        Assert.assertEquals(growsariUser.getId(), result.getId());
     }
 
     @Test
     public void registerUser(){
-        User user = new User(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
-        user.setId(ID_PROP);
+        GrowsariUser growsariUser = new GrowsariUser(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
+        growsariUser.setId(ID_PROP);
 
-        Mockito.when(userService.getUser(ID_PROP)).thenReturn(user);
-        Mockito.when(userService.saveUser(user)).thenReturn(user);
+        Mockito.when(userService.getUser(ID_PROP)).thenReturn(growsariUser);
+        Mockito.when(userService.saveUser(growsariUser)).thenReturn(growsariUser);
 
-        User result = userController.registerUser(user);
+        GrowsariUser result = userController.registerUser(growsariUser);
 
-        Assert.assertEquals(user, result);
+        Assert.assertEquals(growsariUser, result);
     }
 
     @Test
     public void getUser(){
-        User user = new User(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
-        user.setId(ID_PROP);
+        GrowsariUser growsariUser = new GrowsariUser(EMAIL_PROP, NAME_PROP, PASSWORD_PROP);
+        growsariUser.setId(ID_PROP);
 
-        Mockito.when(userService.getUser(ID_PROP)).thenReturn(user);
+        Mockito.when(userService.getUser(ID_PROP)).thenReturn(growsariUser);
 
-        User result = userController.getUser(ID_PROP);
+        GrowsariUser result = userController.getUser(ID_PROP);
 
-        Assert.assertEquals(user, result);
+        Assert.assertEquals(growsariUser, result);
 
     }
 }

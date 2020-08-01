@@ -1,14 +1,14 @@
 package com.growsari.application.server.service.security;
 
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 
 public interface UserService {
 
-    User authenticateUser();
+    GrowsariUser authenticateUser();
 
-    User saveUser(User user);
+    GrowsariUser saveUser(GrowsariUser growsariUser);
 
-    User getUser(String id);
+    GrowsariUser getUser(String id);
 
     void unsuccessfulAuthentication(String name, Throwable cause);
 }

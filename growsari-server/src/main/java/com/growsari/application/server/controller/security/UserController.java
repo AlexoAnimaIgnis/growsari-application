@@ -2,7 +2,7 @@ package com.growsari.application.server.controller.security;
 
 
 import com.growsari.application.common.dto.security.AuthenticateResponseDTO;
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 import com.growsari.application.server.service.security.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,25 +29,25 @@ public class UserController {
 
     @PostMapping(value = {"/register"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
-    User registerUser(@RequestBody User user) {
-        Assert.notNull(user, "User cannot be null");
+    GrowsariUser registerUser(@RequestBody GrowsariUser growsariUser) {
+        Assert.notNull(growsariUser, "User cannot be null");
 
-        logger.debug(user.toString());
+        logger.debug(growsariUser.toString());
 
-        return getUser(userService.saveUser(user).getId());
+        return getUser(userService.saveUser(growsariUser).getId());
     }
 
     @GetMapping(value = {"/users/{id}"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
-    User getUser(@PathVariable String id) {
-        User user = userService.getUser(id);
-        return user;
+    GrowsariUser getUser(@PathVariable String id) {
+        GrowsariUser growsariUser = userService.getUser(id);
+        return growsariUser;
     }
 
-    @PostMapping(value = {"/login"}, produces = MediaType.APPLICATION_JSON)
+    @GetMapping(value = {"/login"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     AuthenticateResponseDTO loginUser() {
-        User user = userService.authenticateUser();
-        return new AuthenticateResponseDTO(user.getId(), user.getName());
+        GrowsariUser growsariUser = userService.authenticateUser();
+        return new AuthenticateResponseDTO(growsariUser.getId(), growsariUser.getName());
     }
 }

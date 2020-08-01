@@ -2,7 +2,7 @@ package com.growsari.application.server.dao.security;
 
 import com.growsari.application.common.dto.PageableResponseDTO;
 import com.growsari.application.common.dto.security.FindUserRequestDTO;
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 import com.growsari.application.server.factory.PageRequestFactory;
 import com.growsari.application.server.factory.security.UserExampleFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserCustomRepositoryImpl implements UserCustomRepository{
 
     @Lazy
     @Autowired
-    private UserRepository userRepository;
+    private GrowsariUserRepository growsariUserRepository;
 
     @Autowired
     private PageRequestFactory pageRequestFactory;
@@ -28,9 +28,9 @@ public class UserCustomRepositoryImpl implements UserCustomRepository{
     private UserExampleFactory userExampleFactory;
 
     @Override
-    public PageableResponseDTO<User> findUser(FindUserRequestDTO requestDTO) {
+    public PageableResponseDTO<GrowsariUser> findUser(FindUserRequestDTO requestDTO) {
         PageRequest pageRequest = pageRequestFactory.create(requestDTO);
-        Page<User> result = userRepository.findAll(
+        Page<GrowsariUser> result = growsariUserRepository.findAll(
                 userExampleFactory.createUser(requestDTO), pageRequest
         );
         return new PageableResponseDTO<>(result.getTotalElements(), result.getContent());

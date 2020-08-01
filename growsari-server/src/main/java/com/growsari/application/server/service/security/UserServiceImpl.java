@@ -1,6 +1,6 @@
 package com.growsari.application.server.service.security;
 
-import com.growsari.application.common.model.security.User;
+import com.growsari.application.common.model.security.GrowsariUser;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
     @Override
-    public User authenticateUser() {
+    public GrowsariUser authenticateUser() {
         return null;
     }
 
     @Override
-    public User saveUser(User user) {
+    public GrowsariUser saveUser(GrowsariUser growsariUser) {
         return null;
     }
 
     @Override
-    public User getUser(String id) {
+    public GrowsariUser getUser(String id) {
         return null;
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider"
+          p:passwordEncoder-ref="bCryptPasswordEncoder"
+          p:userDetailsService-ref="growsariUserDetailsService"
+          p:userCache-ref="userCache"
+    />
+
+    <security:authentication-manager id="authenticationManager" erase-credentials="false">
+        <security:authentication-provider ref="daoAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+
+    <bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter"
+          p:forceEagerSessionCreation="false"/>
+
+    <bean id="userSpringCache" class="com.growsari.application.server.cache.SpringCacheFactoryBean">
+        <constructor-arg type="org.springframework.cache.CacheManager" ref="cacheManager"/>
+        <constructor-arg type="java.lang.String" value="#{T(com.growsari.application.util.SecurityConstants).SPRING_SECURITY_USER_CACHE}"/>
+    </bean>
+
+    <bean id="userCache" class="org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache">
+        <constructor-arg type="org.springframework.cache.Cache" ref="userSpringCache"/>
+    </bean>
+
+    <bean id="reBasicAuthenticationFilter" class="com.growsari.application.server.security.BasicAuthenticationFilter">
+        <constructor-arg type="org.springframework.security.authentication.AuthenticationManager" ref="authenticationManager"/>
+        <constructor-arg type="org.springframework.security.web.AuthenticationEntryPoint" ref="growsariBasicAuthenticationEntryPoint"/>
+        <constructor-arg type="com.growsari.application.server.service.security.UserService" ref="userService"/>
+    </bean>
+
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <security:filter-chain-map request-matcher="ant">
+            <security:filter-chain pattern="/rest/**" filters="securityContextPersistenceFilter, reBasicAuthenticationFilter"/>
+        </security:filter-chain-map>
+    </bean>
+<!--    <bean id="growsariBasicAuthenticationEntryPoint" class="com.growsari.application.server.security.GrowsariBasicAuthenticationEntryPoint"/>-->
+<!--    <bean id="userService" class="com.growsari.application.server.service.security.UserServiceImpl"/>-->
+</beans>
