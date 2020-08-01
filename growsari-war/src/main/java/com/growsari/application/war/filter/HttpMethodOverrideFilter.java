@@ -23,20 +23,20 @@ public class HttpMethodOverrideFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String currentMethod = request.getMethod();
         HttpServletRequest httpServletRequest = request;
-        Object errorException = httpServletRequest.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE);
+        Object errorException = request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE);
 
-        if(HttpMethod.POST.name().equals(currentMethod) && errorException == null) {
-            String httpMethod = httpServletRequest.getHeader(X_HTTP_METHOD_OVERRIDE_HEADER);
+        if (HttpMethod.POST.name().equals(currentMethod) && errorException == null) {
+            String httpMethod = request.getHeader(X_HTTP_METHOD_OVERRIDE_HEADER);
 
-            if(!httpMethod.isEmpty()) {
+            if (httpMethod != null) {
                 String method = httpMethod.toUpperCase();
 
-                if(SUPPORTED_HTTP_METHODS.contains(method)) {
-                    request = new HttpMethodRequestWrapper(httpServletRequest, method);
+                if (SUPPORTED_HTTP_METHODS.contains(method)) {
+                    httpServletRequest = new HttpMethodRequestWrapper(request, method);
                 }
             }
         }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(httpServletRequest, response);
     }
 }

@@ -6,6 +6,7 @@ import com.growsari.application.util.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public class UserServiceImpl implements UserService {
     private GrowsariUserDetailsHolder growsariUserDetailsHolder;
     @Autowired
     private GrowsariUserRepository growsariUserRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public GrowsariUserDetails authenticateUser() {
@@ -30,7 +33,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public GrowsariUser saveUser(GrowsariUser growsariUser) {
-        return null;
+        if (!isUniqueLogin(growsariUser.getName())) {
+            throw new RuntimeException("User with name : " + growsariUser.getName() + " already exists.");
+        }
+        growsariUser.setPassword(passwordEncoder.encode(growsariUser.getPassword()));
+        return growsariUserRepository.save(growsariUser);
+    }
+
+    @Override
+    public boolean isUniqueLogin(String login) {
+        return growsariUserRepository.countByName(login) < 1;
     }
 
     @Override
@@ -43,4 +55,5 @@ public class UserServiceImpl implements UserService {
     public void unsuccessfulAuthentication(String name, Throwable cause) {
         GrowsariUser growsariUser = growsariUserRepository.findByName(name);
     }
+
 }

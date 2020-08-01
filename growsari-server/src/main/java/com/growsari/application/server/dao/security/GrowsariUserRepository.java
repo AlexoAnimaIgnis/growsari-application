@@ -7,4 +7,6 @@ public interface GrowsariUserRepository extends GrowsariJpaRepository<GrowsariUs
     GrowsariUser findByName(String name);
 
     GrowsariUser getById(String id);
+
+    Long countByName(String login);
 }

@@ -1,10 +1,19 @@
 package com.growsari.application.common.model.security;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.growsari.application.util.SecurityConstants;
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,6 +23,10 @@ import java.util.Set;
 @Table(name = "USER_ACTIVITY")
 @PrimaryKeyJoinColumn(name = "ACTIVITY_FK")
 @JsonTypeName("com.growsari.application.common.model.security.UserActivity")
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "class")
 public class UserActivity implements Serializable {
     private static final long serialVersionUID = 1L;
 

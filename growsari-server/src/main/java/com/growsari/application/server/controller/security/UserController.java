@@ -32,7 +32,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = {"/register"}, produces = MediaType.APPLICATION_JSON)
+    /**
+     * Item 1: Register a User
+     * @param growsariUser
+     * @return
+     */
+    @PostMapping(value = {"/user/register"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     GrowsariUser registerUser(@RequestBody GrowsariUser growsariUser) {
         Assert.notNull(growsariUser, "User cannot be null");
@@ -49,7 +54,11 @@ public class UserController {
         return growsariUser;
     }
 
-    @GetMapping(value = {"/login"}, produces = MediaType.APPLICATION_JSON)
+    /**
+     * Item 2: User Login
+     * @return
+     */
+    @GetMapping(value = {"/user/login"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     AuthenticateResponseDTO loginUser() {
         GrowsariUserDetails growsariUser = userService.authenticateUser();

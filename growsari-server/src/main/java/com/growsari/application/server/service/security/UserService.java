@@ -11,4 +11,6 @@ public interface UserService {
     GrowsariUser getUser(String loginName);
 
     void unsuccessfulAuthentication(String name, Throwable cause);
+
+    boolean isUniqueLogin(String login);
 }
