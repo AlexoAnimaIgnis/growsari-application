@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>growsari-application</artifactId>
-        <groupId>org.growsari-application</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>growsari-war</artifactId>
     <packaging>war</packaging>
     <name>growsari-war</name>
+
+    <parent>
+        <artifactId>growsari</artifactId>
+        <groupId>org.growsari-application</groupId>
+        <version>1.0.0</version>
+    </parent>
 
     <build>
         <finalName>growsari-application</finalName>
@@ -42,7 +41,6 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 
     <dependencies>
@@ -51,21 +49,28 @@
             <artifactId>growsari-server</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-       <!-- <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>-->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.3.2.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>2.3.2.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -20,12 +20,13 @@ public class StartupContextListener implements ServletContextListener {
     private static final String UNREGISTER_JDBC_DRIVER_MSG = "Unregistering of jdbc driver %s failed";
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        logger.info("Application started");
+        logger.info(" Growsari Application started");
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        logger.info("Application stopped");
+        logger.info("Growsari Application stopped");
 
+        unloadJDBCDrivers();
         stopLogback();
     }
 

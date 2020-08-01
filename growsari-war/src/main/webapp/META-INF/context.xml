@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/growsari-application" privileged="true" antiResourceLocking="true">
+<Context path="/growsari" privileged="true" antiResourceLocking="true">
     <JarScanner>
         <JarScanFilter tldSkip="*.*"/>
     </JarScanner>
