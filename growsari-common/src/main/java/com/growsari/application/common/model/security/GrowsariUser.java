@@ -1,6 +1,6 @@
 package com.growsari.application.common.model.security;
 
-import com.growsari.application.common.model.AbstractEntity;
+import com.growsari.application.common.model.GrowsariAbstractEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
@@ -17,8 +17,8 @@ import java.util.Objects;
 @Entity
 @Proxy(lazy = false)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "USER")
-public class User extends AbstractEntity {
+@Table(name = "GROWSARIUSER")
+public class GrowsariUser extends GrowsariAbstractEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "NAME", unique = true, nullable = false)
@@ -31,9 +31,9 @@ public class User extends AbstractEntity {
     @Email
     private String email;
 
-    public User() {}
+    public GrowsariUser() {}
 
-    public User(String email, String name, String password) {
+    public GrowsariUser(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -73,7 +73,7 @@ public class User extends AbstractEntity {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        User that = (User) obj;
+        GrowsariUser that = (GrowsariUser) obj;
 
         return Objects.equals(name, that.name);
     }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * @author alexander.ballester
  */
 @MappedSuperclass
-public abstract class ModifiableEntity extends AbstractEntity {
+public abstract class GrowsariModifiableEntity extends GrowsariAbstractEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "MODIFICATION_ID", nullable = false)

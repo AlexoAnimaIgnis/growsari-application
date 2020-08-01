@@ -1,7 +1,6 @@
 package com.growsari.application.common.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.google.common.base.MoreObjects;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -16,7 +15,7 @@ import java.util.Objects;
  * @author alexander.ballester
  */
 @MappedSuperclass
-public class AbstractEntity implements Serializable {
+public class GrowsariAbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -76,7 +75,7 @@ public class AbstractEntity implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        AbstractEntity that = (AbstractEntity) obj;
+        GrowsariAbstractEntity that = (GrowsariAbstractEntity) obj;
 
         return Objects.equals(id, that.id);
     }

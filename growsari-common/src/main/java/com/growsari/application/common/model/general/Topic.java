@@ -1,7 +1,7 @@
 package com.growsari.application.common.model.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.growsari.application.common.model.ModifiableEntity;
+import com.growsari.application.common.model.GrowsariModifiableEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
@@ -22,7 +22,7 @@ import java.util.Set;
 @Proxy(lazy = false)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "TOPIC")
-public class Topic extends ModifiableEntity {
+public class Topic extends GrowsariModifiableEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "SUBJECT", unique = true, nullable = false)
@@ -32,7 +32,7 @@ public class Topic extends ModifiableEntity {
     private String description;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Message> messageList = new LinkedHashSet<>();
 
     public Topic() {}

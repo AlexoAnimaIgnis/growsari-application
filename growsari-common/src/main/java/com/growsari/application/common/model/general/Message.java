@@ -1,6 +1,6 @@
 package com.growsari.application.common.model.general;
 
-import com.growsari.application.common.model.ModifiableEntity;
+import com.growsari.application.common.model.GrowsariModifiableEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 /**
  * @author alexander.ballester
@@ -20,12 +19,11 @@ import javax.validation.Valid;
 @Proxy(lazy = false)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "MESSAGE")
-public class Message extends ModifiableEntity {
+public class Message extends GrowsariModifiableEntity {
     private static final long serialVersionUID = 1L;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "TOPIC_FK", nullable = false)
-    @Valid
     private Topic topic;
 
     @Column(name = "MESSAGE")
