@@ -1,8 +1,8 @@
-<project name="growsari-application" default="tomcat-clean-copy" basedir=".">
+<project name="growsari" default="tomcat-clean-copy" basedir=".">
     <description>growsari installer</description>
 
     <property environment="env"/>
-    <property name="app.name" value="growsari-application"/>
+    <property name="app.name" value="growsari"/>
     <property name="app.location" value="growsari-war/target"/>
     <property name="tomcat.deploy.dir" value="${env.TOMCAT_HOME}/webapps"/>
     <property name="mvn.mainclass" value="org.codehaus.plexus.classworlds.launcher.Launcher" />
