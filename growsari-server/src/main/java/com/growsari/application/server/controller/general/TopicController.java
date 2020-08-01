@@ -8,14 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sk.nociar.jpacloner.JpaCloner;
 
 import javax.ws.rs.core.MediaType;
@@ -30,6 +23,11 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    /**
+     * returns list of topics
+     * @param findTopicRequestDTO
+     * @return
+     */
     @GetMapping(value = {"/topics"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     PageableResponseDTO<Topic> findTopics(@RequestBody FindTopicRequestDTO findTopicRequestDTO) {
@@ -37,7 +35,12 @@ public class TopicController {
         return new PageableResponseDTO<Topic>(result.getTotalRecords(), JpaCloner.clone(result.getResult()));
     }
 
-    @PostMapping(value = {"/topics"}, produces = MediaType.APPLICATION_JSON)
+    /**
+     * Item 3: Create Topic
+     * @param topic
+     * @return
+     */
+    @PostMapping(value = {"/topic"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     Topic createTopic(@RequestBody Topic topic) {
         Assert.notNull(topic, "Topic should not be null");
@@ -47,7 +50,13 @@ public class TopicController {
         return getTopic(topicService.createTopic(topic).getId());
     }
 
-    @PutMapping(value = {"/topics/{id}"}, produces = MediaType.APPLICATION_JSON)
+    /**
+     * Item 4: Update Topic
+     * @param id
+     * @param topic
+     * @return
+     */
+    @PatchMapping(value = {"/topic/{id}"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     Topic updateTopic(@PathVariable String id, @RequestBody Topic topic) {
         Assert.notNull(topic, "Topic " + id + " cannot be null");
@@ -63,6 +72,10 @@ public class TopicController {
         return topicService.getTopic(id);
     }
 
+    /**
+     * Item 5: Delete Topic
+     * @param id
+     */
     @DeleteMapping(value = {"/topics/{id}"}, produces = MediaType.APPLICATION_JSON)
     void deleteTopic(@PathVariable String id) {
         Assert.notNull(id, "ID should not be null");

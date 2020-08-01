@@ -29,7 +29,7 @@ public abstract class GrowsariModifiableEntity extends GrowsariAbstractEntity {
     private String updatedBy;
 
     /**
-     * modification date
+     * deleted date
      */
     @Column(name = "DELETED_AT", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
