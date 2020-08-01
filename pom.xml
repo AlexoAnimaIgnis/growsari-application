@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.growsari-application</groupId>
-    <artifactId>growsari-application</artifactId>
+    <artifactId>growsari</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <jvm.args>-Xms256m</jvm.args>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springframework.version>5.1.0.RELEASE</springframework.version>
-        <spring.security.version>5.1.0.RELEASE</spring.security.version>
+        <springframework.version>5.2.8.RELEASE</springframework.version>
+        <spring.security.version>5.3.3.RELEASE</spring.security.version>
         <logback.version>1.2.3</logback.version>
-        <aspectj.version>1.9.1</aspectj.version>
-        <aspectjtools.version>1.9.1</aspectjtools.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <aspectjtools.version>1.9.2</aspectjtools.version>
     </properties>
 
     <modules>
-        <module>growsari-common</module>
         <module>growsari-util</module>
-        <module>growsari-server</module>
+        <module>growsari-common</module>
         <module>growsari-client</module>
+        <module>growsari-properties</module>
+        <module>growsari-server</module>
         <module>growsari-war</module>
     </modules>
 
@@ -116,7 +116,6 @@
             </plugin>
         </plugins>
     </build>
-
 
     <repositories>
         <repository>
@@ -286,12 +285,12 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>2.9.7</version>
+                <version>2.9.8</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.9.7</version>
+                <version>2.9.8</version>
             </dependency>
             <dependency>
                 <groupId>com.hazelcast</groupId>
@@ -391,7 +390,7 @@
             <dependency>
                 <groupId>com.cosium.spring.data</groupId>
                 <artifactId>spring-data-jpa-entity-graph</artifactId>
-                <version>2.2.0</version>
+                <version>2.3.0</version>
             </dependency>
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
@@ -440,5 +439,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
