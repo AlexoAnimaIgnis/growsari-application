@@ -8,7 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import sk.nociar.jpacloner.JpaCloner;
 
 import javax.ws.rs.core.MediaType;
@@ -28,7 +35,7 @@ public class TopicController {
      * @param findTopicRequestDTO
      * @return
      */
-    @GetMapping(value = {"/topics"}, produces = MediaType.APPLICATION_JSON)
+    @GetMapping(value = {"/topic"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     PageableResponseDTO<Topic> findTopics(@RequestBody FindTopicRequestDTO findTopicRequestDTO) {
         PageableResponseDTO<Topic> result = topicService.findTopics(findTopicRequestDTO);
@@ -66,7 +73,7 @@ public class TopicController {
         return getTopic(topicService.updateTopic(topic).getId());
     }
 
-    @GetMapping(value = {"/topics/{id}"}, produces = MediaType.APPLICATION_JSON)
+    @GetMapping(value = {"/topic/{id}"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     Topic getTopic(@PathVariable String id) {
         return topicService.getTopic(id);
@@ -76,7 +83,7 @@ public class TopicController {
      * Item 5: Delete Topic
      * @param id
      */
-    @DeleteMapping(value = {"/topics/{id}"}, produces = MediaType.APPLICATION_JSON)
+    @DeleteMapping(value = {"/topic/{id}"}, produces = MediaType.APPLICATION_JSON)
     void deleteTopic(@PathVariable String id) {
         Assert.notNull(id, "ID should not be null");
         topicService.deleteTopic(id);
