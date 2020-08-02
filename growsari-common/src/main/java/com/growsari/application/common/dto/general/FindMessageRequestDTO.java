@@ -6,6 +6,7 @@ import com.growsari.application.common.model.general.Topic;
 public class FindMessageRequestDTO extends PageableRequestDTO {
     private String message;
     private Topic topic;
+    private String topicId;
 
     public FindMessageRequestDTO() {}
 
@@ -27,5 +28,13 @@ public class FindMessageRequestDTO extends PageableRequestDTO {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public String getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
     }
 }

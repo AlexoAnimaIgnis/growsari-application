@@ -2,6 +2,7 @@ package com.growsari.application.server.service.security;
 
 import com.growsari.application.common.model.security.GrowsariUser;
 import com.growsari.application.server.dao.security.GrowsariUserRepository;
+import com.growsari.application.util.DateHelper;
 import com.growsari.application.util.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -10,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service("userService")
 @ManagedResource(objectName = "com.growsari.application:type=service,name=userServiceImpl",
@@ -37,6 +41,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("User with name : " + growsariUser.getName() + " already exists.");
         }
         growsariUser.setPassword(passwordEncoder.encode(growsariUser.getPassword()));
+        growsariUser.setCreatedAt(DateHelper.toLocalDateTime(
+                LocalDateTime.now().toString(),
+                DateTimeFormatter.ISO_DATE_TIME));
+        growsariUser.setUpdatedAt(DateHelper.toLocalDateTime(
+                LocalDateTime.now().toString(),
+                DateTimeFormatter.ISO_DATE_TIME));
         return growsariUserRepository.save(growsariUser);
     }
 

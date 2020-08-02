@@ -4,8 +4,5 @@
     "description":"Topic Test 2",
     "createdBy": "1",
     "updatedBy": "fc45d1a4-44c6-45f3-8efd-5465a3fe0711",
-    "createdAt": "2012-08-02T12:16:10",
-    "updatedAt": "2020-08-02T12:16:10",
-    "modificationId": 0,
-    "deletedAt" : "2020-08-02T12:16:10"
+    "modificationId": 0
 }

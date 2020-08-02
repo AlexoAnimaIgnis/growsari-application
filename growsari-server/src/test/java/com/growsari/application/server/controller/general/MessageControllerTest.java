@@ -41,7 +41,7 @@ public class MessageControllerTest {
         message.setId(ID_PROP);
 
         Mockito.when(messageService.getMessage(ID_PROP)).thenReturn(message);
-        Mockito.when(messageService.createMessage(message)).thenReturn(message);
+        Mockito.when(messageService.createMessage(message, ID_PROP)).thenReturn(message);
 
         Message result = messageController.createMessage(topic.getId(), message);
 
@@ -56,7 +56,7 @@ public class MessageControllerTest {
 
         Mockito.when(messageService.findMessages(requestDTO)).thenReturn(responseDTO);
 
-        PageableResponseDTO<Message> result = messageController.findMessages(requestDTO);
+        PageableResponseDTO<Message> result = messageController.findMessages(ID_PROP,requestDTO);
 
         Assert.assertEquals(responseDTO.getResult(), result.getResult());
         Assert.assertEquals(responseDTO.getTotalRecords(), result.getTotalRecords());

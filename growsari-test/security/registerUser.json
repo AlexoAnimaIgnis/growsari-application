@@ -1,7 +1,5 @@
 {
-    "name": "test5",
-    "password": "$2a$10$V2H5yrrvtpL.vqzBWhDcVO2t3dsvneHGUdsLmF1WV23vlBWPF35Si",
-    "email": "email@dot.com",
-    "createdAt": "2012-08-02T12:16:10",
-    "updatedAt": "2012-08-02T12:16:10"
+    "name": "test7",
+    "password": "test7",
+    "email": "email@dot.com"
 }

@@ -33,12 +33,15 @@ public class MessageController {
 
     /**
      * Item 8: Get all messages in a Topic
+     *
+     * @param id
      * @param findMessageRequestDTO
      * @return
      */
     @GetMapping(value = {"/topic/{id}/messages"}, produces = MediaType.APPLICATION_JSON)
     @ResponseBody
-    PageableResponseDTO<Message> findMessages(@RequestBody FindMessageRequestDTO findMessageRequestDTO) {
+    PageableResponseDTO<Message> findMessages(@PathVariable String id, @RequestBody FindMessageRequestDTO findMessageRequestDTO) {
+        findMessageRequestDTO.setTopicId(id);
         PageableResponseDTO<Message> result = messageService.findMessages(findMessageRequestDTO);
         return new PageableResponseDTO<>(result.getTotalRecords(), JpaCloner.clone(result.getResult()));
     }
@@ -54,7 +57,7 @@ public class MessageController {
         Assert.notNull(id, "Id should not be null");
         Assert.notNull(message, "message object should not be null");
 
-        return getMessage(messageService.createMessage(message).getId());
+        return getMessage(messageService.createMessage(message, id).getId());
     }
 
     @PutMapping(value = {"/messages/{id}"}, produces = MediaType.APPLICATION_JSON)

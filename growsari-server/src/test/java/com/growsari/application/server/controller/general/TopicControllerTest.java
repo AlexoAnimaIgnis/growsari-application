@@ -64,7 +64,7 @@ public class TopicControllerTest {
         topic.setId(ID_PROP);
 
         Mockito.when(topicService.getTopic(ID_PROP)).thenReturn(topic);
-        Mockito.when(topicService.updateTopic(topic)).thenReturn(topic);
+        Mockito.when(topicService.updateTopic(topic, ID_PROP)).thenReturn(topic);
 
         Topic result = topicController.updateTopic(ID_PROP, topic);
 

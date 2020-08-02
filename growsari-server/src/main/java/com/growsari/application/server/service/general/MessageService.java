@@ -5,7 +5,7 @@ import com.growsari.application.common.dto.general.FindMessageRequestDTO;
 import com.growsari.application.common.model.general.Message;
 
 public interface MessageService {
-    Message createMessage(Message message);
+    Message createMessage(Message message, String topicId);
 
     Message getMessage(String id);
 

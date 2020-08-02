@@ -9,7 +9,7 @@ public interface TopicService {
 
     Topic createTopic(Topic topic);
 
-    Topic updateTopic(Topic topic);
+    Topic updateTopic(Topic topic, String topicId);
 
     Topic getTopic(String id);
 

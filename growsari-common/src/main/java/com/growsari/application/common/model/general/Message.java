@@ -5,11 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author alexander.ballester
@@ -19,8 +15,16 @@ import javax.persistence.Table;
 @Proxy(lazy = false)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "MESSAGE")
+@NamedQueries({
+        @NamedQuery(name = Message.QUERY_FIND_BY_TOPIC, query = "SELECT b FROM Message b WHERE b.topic.id = :"
+                + Message.QUERY_PARAM_TOPIC_ID
+        )
+})
 public class Message extends GrowsariModifiableEntity {
     private static final long serialVersionUID = 1L;
+
+    public static final String QUERY_FIND_BY_TOPIC = "Message.findByTopic";
+    public static final String QUERY_PARAM_TOPIC_ID = "topicId";
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "TOPIC_FK", nullable = false)

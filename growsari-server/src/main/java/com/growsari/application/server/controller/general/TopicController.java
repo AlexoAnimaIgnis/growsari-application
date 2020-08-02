@@ -70,7 +70,7 @@ public class TopicController {
 
         logger.debug(topic.toString());
 
-        return getTopic(topicService.updateTopic(topic).getId());
+        return getTopic(topicService.updateTopic(topic, id).getId());
     }
 
     @GetMapping(value = {"/topic/{id}"}, produces = MediaType.APPLICATION_JSON)

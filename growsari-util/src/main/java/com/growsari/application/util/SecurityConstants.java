@@ -15,4 +15,6 @@ public interface SecurityConstants {
     String GROWSARI = "GROWSARI";
 
     String AUTHORITY_PATTERNS = "%s_%s";
+
+    String LOCAL_DATE_FORMAT = "yyyy.MM.dd HH:mm:ss";
 }
