@@ -28,4 +28,12 @@ public class AuthenticateResponseDTO {
     public String getName() {
         return name;
     }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public List<String> getActivities() {
+        return activities;
+    }
 }
