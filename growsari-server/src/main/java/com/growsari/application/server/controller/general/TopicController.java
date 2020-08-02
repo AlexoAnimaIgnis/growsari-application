@@ -23,7 +23,7 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
-    /**
+    /** Item 7: Retrieve all topics
      * returns list of topics
      * @param findTopicRequestDTO
      * @return

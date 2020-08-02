@@ -31,7 +31,7 @@ public abstract class GrowsariModifiableEntity extends GrowsariAbstractEntity {
     /**
      * deleted date
      */
-    @Column(name = "DELETED_AT", nullable = false)
+    @Column(name = "DELETED_AT")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime deletedAt;
 

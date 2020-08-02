@@ -35,9 +35,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Topic createTopic(Topic topic) {
-        if (!isTopicUnique(topic.getSubject())) {
-            throw new RuntimeException("Topic: " + topic.getSubject() + " already exists.");
-        }
+//        if (!isTopicUnique(topic.getSubject())) {
+//            throw new RuntimeException("Topic: " + topic.getSubject() + " already exists.");
+//        }
         topic.setModificationId(0);
         return topicRepository.saveAndFlush(topic);
     }
