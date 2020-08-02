@@ -81,8 +81,13 @@ public class TopicServiceImpl implements TopicService {
         Topic newTopic = new Topic();
         Topic oldTopic = topicRepository.getOne(topic.getId());
 
-        newTopic.setDescription(oldTopic.getDescription());
-        newTopic.setSubject(oldTopic.getSubject());
+        newTopic.setId(topic.getId());
+        newTopic.setDescription(topic.getDescription());
+        newTopic.setSubject(topic.getSubject());
+        newTopic.setCreatedBy(topic.getCreatedBy());
+        newTopic.setUpdatedBy(topic.getUpdatedBy());
+        newTopic.setCreatedAt(topic.getCreatedAt());
+        newTopic.setUpdatedAt(topic.getUpdatedAt());
         return newTopic;
     }
 }
