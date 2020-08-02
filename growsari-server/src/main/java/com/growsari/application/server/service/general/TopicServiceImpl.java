@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +36,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Topic createTopic(Topic topic) {
-//        if (!isTopicUnique(topic.getSubject())) {
-//            throw new RuntimeException("Topic: " + topic.getSubject() + " already exists.");
-//        }
+        if (!isTopicUnique(topic.getSubject())) {
+            throw new RuntimeException("Topic: " + topic.getSubject() + " already exists.");
+        }
         topic.setModificationId(0);
         return topicRepository.saveAndFlush(topic);
     }
@@ -65,11 +66,8 @@ public class TopicServiceImpl implements TopicService {
         Topic oldTopic = topicRepository.getOne(id);
         Topic newTopic = cloneTopic(oldTopic);
 
-        /**
-         * To Do
-         * set boolean value for Deleted_at or isDeleted
-         */
         newTopic.setModificationId(oldTopic.getModificationId() + 1);
+        newTopic.setDeletedAt(LocalDateTime.now());
         topicRepository.saveAndFlush(newTopic);
     }
 
