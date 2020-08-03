@@ -22,7 +22,7 @@ export class LoginService extends GrowsariHttpInterfaceService{
   }
 
   login(username, password): Observable<AuthenticateResponseDTO> {
-    return this.httpClient.get('/growsari-application/rest/login',{
+    return this.httpClient.get('/growsari-application/rest/user/login',{
       headers: this.createHeader(username, password)}).pipe(
         map(result => result as AuthenticateResponseDTO)
       );

@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="card border-light mb-3 width-full">
+    <div class="card-body">
+      <fieldset>
+        <form [formGroup]="userForm">
+          <div class="media">
+            <div class="media-body">
+              
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+
+                          <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-9">
+
+                              <input type="text" formControlName="name" 
+                                                class="form-control form-control-sm" id="name" aria-describedby="name" 
+                                                [(ngModel)]="name"
+                                                [ngClass]="{ 'is-invalid': (submitted && formFields.name.errors) }" 
+                                                placeholder="Enter name"
+                                                readonly onfocus="this.removeAttribute('readonly')" onblur="this.setAttribute('readonly', '')"
+                                                />
+                                            
+                              <div *ngIf="formFields.name.errors" class="invalid-feedback">
+                                  <div *ngIf="submitted && formFields.name.errors.required">Name</div>
+                              </div>
+                            </div> <!-- name-->
+                        </div> <!-- formgroup-->
+
+                        <!-- PASSWORD-->
+                        <div class="form-group row">
+                          <label for="password" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+
+                              <input type="password" formControlName="password" 
+                                                    class="form-control form-control-sm" id="password" aria-describedby="password" 
+                                                    [(ngModel)]="password"
+                                                    [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }"
+                                                    placeholder="Enter password"
+                                                    readonly onfocus="this.removeAttribute('readonly')" onblur="this.setAttribute('readonly', '')"
+                                                    />
+                              <div *ngIf="submitted && formFields.password.errors" class="invalid-feedback">
+                                  <div *ngIf="formFields.password.errors.required">Password is required</div>
+                              </div>
+                            </div> <!-- name-->
+                        </div> <!-- formgroup-->
+
+                        <div class="form-group row">
+                          <label for="confirmPassword" class="col-sm-3 col-form-label">Repeat Password</label>
+                          <div class="col-sm-9">
+                              <input type="password" formControlName="confirmPassword"
+                                  class="form-control form-control-sm" 
+                                  id="confirmPassword" aria-describedby="confirmPassword"  
+                                  [ngClass]="{ 'is-invalid': formFields.confirmPassword.errors?.confirmPasswordMatch || (submitted && formFields.confirmPassword.errors) }"
+                                  placeholder="Re-enter password"
+                                  />
+                              <div *ngIf="formFields.confirmPassword.errors" class="invalid-feedback">
+                                  <div *ngIf="submitted && formFields.confirmPassword.errors.required">Repeat Password is required</div>
+                                  <div *ngIf="formFields.confirmPassword.errors.confirmPasswordMatch">Passwords must match</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END PASSWORD-->
+                        <!-- EMAIL-->
+                        <div class="form-group row">
+                          <label for="email" class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                              <input type="text" formControlName="email" 
+                                  class="form-control form-control-sm" id="email" aria-describedby="email" 
+                                  [ngClass]="{ 'is-invalid': submitted && formFields.email.errors }" 
+                                  [(ngModel)]="email"
+                                  placeholder="Enter email address"
+                                  />
+                              <div *ngIf="submitted && formFields.email.errors" class="invalid-feedback">
+                                  <div *ngIf="formFields.email.errors.required">Email is required</div>
+                                  <div *ngIf="formFields.email.errors.email">Email must be a valid email address</div>
+                              </div>
+                          </div>
+                      </div>
+                    </div> <!-- form horizontal-->
+                </div> <!-- col sm 6-->
+              </div>
+              
+            </div> <!-- media body-->
+          </div> <!--media-->
+          <button type="button" class="btn btn-dark btn-sm mr-1 float-right" (click)="resetForm()">Reset</button>
+          <button type="submit" class="btn btn-dark btn-sm mr-1 float-right" (click)="createUser()">Save</button>
+        
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

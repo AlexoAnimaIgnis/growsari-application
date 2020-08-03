@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   authenticateUser(){
+    this.router.navigate([RoutingConstants.getRoute(RoutingConstants.ROUTE_DASHBOARD)]);
     this.loginService.login(this.growsariUser.getName(), this.growsariUser.getPassword()).subscribe(
       response => {
         this.isLogging = false;

@@ -22,7 +22,7 @@ export class MainAuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.userService.isAuthenticated()) {
-      this.router.navigate(['/login', {url: state.url}] );
+      this.router.navigate(['/user/login', {url: state.url}] );
       return false;
     }
     return true; 

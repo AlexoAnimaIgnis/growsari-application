@@ -1,0 +1,105 @@
+.mat-toolbar {
+display: flex;
+width: auto;
+max-height: 45px;
+min-height: 45px;
+}
+
+.nav-toolbar-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.nav-toolbar {
+    position: fixed; 
+    z-index:2;
+}
+
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+        Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+
+.span-vertical-align-center {
+    vertical-align: center;
+}
+
+.span-vertical-align-center img {
+    margin-right: 5px;
+}
+
+.span-vertical-align-center h3 {
+    margin-right: 20px;
+}
+
+.toolbar-search, mat-placeholder {
+    color: white;
+    font-size: 0.8em;
+}
+
+.container-fluid-page {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  
+  .row.main.content {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  
+  /* column container */
+  .colmask {
+      position:relative;	/* This fixes the IE7 overflow hidden bug */
+      clear:both;
+      float:left;
+      width:100%;			/* width of whole page */
+      overflow:hidden;		/* This chops off any overhanging divs */
+  }
+  
+  #footer{
+      display:flex;
+      background: #377ea6;
+      color: #fff;
+  }
+  
+  .example-fill-remaining-space {
+      /* This fills the remaining space, by using flexbox. 
+           Every toolbar row uses a flexbox row layout. */
+      flex: 1 1 auto;
+  }
+  
+  .spanRight{
+      margin-right: 50px;
+  }
+  
+  :host /deep/ .datatable-header {
+      height: unset !important;
+      background-color: #424242;
+      color: white;
+  }
+  
+  :host /deep/ .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      text-align: left !important;
+      vertical-align: middle !important;
+  }
+  
+  :host /deep/ .ngx-datatable.scroll-vertical .datatable-body {
+      overflow-y: auto;
+  }
+  
+  .sidenav{
+      width: 120pt
+  }
+  
+  .white-bg {
+      background: white;
+  }

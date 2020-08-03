@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+    <mat-sidenav-content class="white-bg">
+        <div id="header">
+            <mat-toolbar class="mat-toolbar">
+                
+                <span class="span-vertical-align-center">
+                    <button mat-icon-button matTooltip="Transaction" [matMenuTriggerFor]="transactionMenu">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <mat-menu #transactionMenu="matMenu">
+                        <ng-template matMenuContent>
+                            <button mat-menu-item (click)="navigateToUsers()">Users</button>
+                            <button mat-menu-item (click)="navigateToTopics()">Topics</button>
+                        </ng-template>
+                    </mat-menu>
+                </span>
+            </mat-toolbar>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<router-outlet></router-outlet>
