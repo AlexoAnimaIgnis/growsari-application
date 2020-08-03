@@ -1,9 +1,9 @@
 import { AbstractEntity } from "../../abstract-entity";
 
 export class GrowsariUser extends AbstractEntity {
-    private name: string;
-    private password: string;
-    private email: string;
+    name: string;
+    password: string;
+    email: string;
     
     public getName(): string {
         return this.name;

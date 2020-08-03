@@ -1,0 +1,28 @@
+<div id="login-div" class="flex-center-align-items">
+  <mat-card id="login-card" class="bg-light">
+    <div>
+      <span class="web-logo">
+        <img src="assets/growsarilogo.png"/>
+      </span>
+    </div>
+    <div>
+      <span class="web-title mat-title">
+          Growsari
+      </span>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLogging"></mat-progress-bar>
+    <mat-card-content>
+      <span style="color: red;">{{ isLoginFailedMessage }}</span>
+      <mat-form-field class="login-card-input">
+        <input matInput placeholder="Username" [(ngModel)]="growsariUser.name">
+      </mat-form-field>
+      <mat-form-field class="login-card-input">
+        <input matInput placeholder="Password" [(ngModel)]="growsariUser.password" type="password">
+      </mat-form-field>
+    </mat-card-content>
+    <div style="justify-content: flex;">
+      <button mat-button mat-raised-button color="primary"
+        (click)="login()">Login</button>
+    </div>
+  </mat-card>
+</div>
